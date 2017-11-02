@@ -6,14 +6,17 @@ COMMENT ON MAIN SCRIPT
 
 from functions.dataLoad import dataLoad
 from functions.dataPlot import dataPlot
-from functions.dataStatitics import dataStatistics
-from functions.userinput import displayMenu,inputNumber,inputStr
+from functions.dataStatistics import dataStatistics
+from functions.userinput import displayMenu,inputStr
+from functions.filterData import filterData
+import numpy as np
 
 #Add welcoming message
 
 
 #Initial variables
 dataLoaded = False
+
 
 #Keep menu until user quits
 while True:
@@ -34,6 +37,7 @@ while True:
                     data = dataLoad(filename) #Load data
                     print("\nData loaded succesfully from",filename,"\n")
                     dataLoaded = True #Set data as loaded
+                    dataOld = np.copy(data) #Copy of data
                     break
                 
                 #exit
@@ -45,7 +49,22 @@ while True:
     
     #Filter data
     elif (menu == 2) and dataLoaded:
-        print("goat")
+        while True:
+            print("\nPlease specify a filter")
+            menu2 = displayMenu(["Bacteria filter","Range filter","Back"])
+            
+            #Bacteria type filter
+            if menu2 == 1:
+                data,bacActive,rangeActive = filterData("Bacteria filter",dataOld)
+               
+            #Range filter
+            elif menu2 == 2:
+                data,bacActive,rangeActive = filterData("Range filter",dataOld)
+            
+            #Back
+            elif menu2 == 3:
+                break
+                        
     
     #Display statistics
     elif (menu == 3) and dataLoaded:
