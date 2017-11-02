@@ -6,10 +6,11 @@ Created on Thu Nov  2 15:25:00 2017
 """
 
 import matplotlib.pyplot as plt
-import matplotlib
+import matplotlib as mpl
 import numpy as np
+from cycler import cycler
 
-matplotlib.style.use('ggplot') #Use a prettier plot
+mpl.style.use('ggplot') #Use a prettier plot
 
 def dataPlot(data):
     
@@ -18,6 +19,10 @@ def dataPlot(data):
     
     xLabel = ["Salmonella enterica","Bacillus cereus","Listeria",
              "Brochothrix thermosphacta"] #x-labes
+    
+    prop_iter = iter(plt.rcParams['axes.prop_cycle'])
+    
+    plt.rc('axes',prop_cycle=plt.rcParams['axes.prop_cycle'])    
     
     plt.bar(x,y) #Plot bar plot
     
