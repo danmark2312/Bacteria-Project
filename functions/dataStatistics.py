@@ -1,18 +1,29 @@
 # -*- coding: utf-8 -*-
-"""
-INPUT: 
-    
-OUTPUT:
-    
-USAGE:
-    
 
-Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
-"""
 
 import numpy as np
 
 def dataStatistics(data,statistics):
+    """
+    INPUT:
+        data: An N x 3 matrix
+        statistics: A string of one of the following statistics:
+            "Mean Temperature"
+            "Mean Growth rate"
+            "Std Temperature"
+            "Std Growth rate"
+            "Rows"
+            "Mean Cold Growth rate"
+            "Mean Hot Growth rate"
+            "Back"
+    OUTPUT:
+        result = A float representing the given statistic
+        
+    USAGE:
+        stat = dataStatistics(data,statistics)
+        
+    Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
+    """
     
 #Defining average temperature
     if statistics == "Mean Temperature":

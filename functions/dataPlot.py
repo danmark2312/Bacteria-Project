@@ -1,14 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-INPUT: 
-    
-OUTPUT:
-    
-USAGE:
-    
 
-Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
-"""
 
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -17,6 +8,20 @@ import numpy as np
 mpl.style.use('ggplot') #Use a prettier plot
 
 def dataPlot(data):
+    """
+    INPUT:
+        data: An N x 3 matrix
+        
+    OUTPUT:
+        A bar plot of number of bacteria and a line plot of each bacteria's
+        temperature to growth rate graph
+        
+    USAGE:
+        dataPlot(data)
+        
+    
+    Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
+    """
     
     #Plot "Number of bacteria"
     x,y = np.unique(data[:,2],return_counts=True) #get x and y values
