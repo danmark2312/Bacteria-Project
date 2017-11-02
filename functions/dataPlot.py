@@ -20,17 +20,16 @@ def dataPlot(data):
     xLabel = ["Salmonella enterica","Bacillus cereus","Listeria",
              "Brochothrix thermosphacta"] #x-labes
     
-    prop_iter = iter(plt.rcParams['axes.prop_cycle'])
+    prop_iter = iter(plt.rcParams['axes.prop_cycle']) #Iterate through colors
     
-    plt.rc('axes',prop_cycle=plt.rcParams['axes.prop_cycle'])    
+    for i in range(0,len(x)):
+        plt.bar(x[i],y[i],color=next(prop_iter)['color']) #Plot bar plot with colors
     
-    plt.bar(x,y) #Plot bar plot
+    plt.xticks(x,xLabel,rotation=35) #Set labes and rotation
     
-    plt.xticks(x,xLabel,rotation=45)
+    plt.title("Number of bacteria") #Set title
     
     plt.show()
     
     
-    
-    
-    
+    #Plot "
