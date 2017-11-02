@@ -34,7 +34,7 @@ def dataLoad(filename):
                 read = False #Do not read line
                 print("Erroneous line at line:",line+1,"Growth rate did not meet requirements")
                 
-            elif ((1 >= arr[0]) and (arr[0] <= 4)): #Bacteria type
+            elif ((1 >= arr[2]) and (arr[2] <= 4)): #Bacteria type
                 read = False #Do not read line
                 print("Erroneous line at line:",line+1,"Bacteria type did not meet requirements")
             
