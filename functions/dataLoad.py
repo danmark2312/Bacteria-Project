@@ -25,6 +25,7 @@ def dataLoad(filename):
         for row in csv.reader(inputfile):
             
             arr = np.array(row[0].split(" "), dtype=float) #Creating an array of row
+            
             #Checking for error conditions
             if ((10 > arr[0]) or (arr[0] > 60)): #Temperature
                 read = False #Do not read line
@@ -47,5 +48,3 @@ def dataLoad(filename):
     data = data[1:len(data)] #Remove placeholder of [0,0,0]
 
     return data
-
-data = dataLoad("test.txt")
