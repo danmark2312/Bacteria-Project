@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Nov  2 15:25:00 2017
+INPUT: 
+    
+OUTPUT:
+    
+USAGE:
+    
 
-@author: s174420
+Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
 """
 
 import matplotlib.pyplot as plt
