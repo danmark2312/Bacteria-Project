@@ -52,7 +52,6 @@ def filterData(filtertype,dataOld,conditions):
     bacStr = ["Salmonella enterica","Bacillus cereus","Listeria",
           "Brochothrix thermosphacta"]
     r1,r2 = -42,-42
-    data = dataOld
     
     #Extracting variables from condition list
     bacActive = conditions[0]
@@ -82,10 +81,8 @@ Select a range of -1 to clear rangefilter""")
         
         #Check if user wants to clear the range
         if (r1 or r2) == -1:
-            #Check for active bacteria filter
-            if type(bacActive) == np.ndarray:
-                mask = np.in1d(data[:,2],bacList) #Where each value of bacList is in dataOld
-                data = data[mask] #Filter from mask
+            data = dataOld #Set old data
+            #Reset range variables
             rangeActive = "No active range filter"
             r1,r2 = -42,-42
             
@@ -96,7 +93,7 @@ Select a range of -1 to clear rangefilter""")
             
    
     #Bacteria filter
-    if filtertype == "Bacteria filter":
+    elif filtertype == "Bacteria filter":
         header("BACTERIA FILTER MENU") #Interaface
         print("""You have chosen to filter for bacteria.
 Select the bacteria you want to filter
@@ -124,17 +121,22 @@ If it is already a filter, it will be removed\n""")
                 #Filter from data
                 mask = np.in1d(dataOld[:,2],bacList) #Where each value of bacList is in dataOld
                 data = dataOld[mask] #Filter from mask
-                #Check for active range
-                if type(rangeActive)==list:
-                    data = dataOld[range_]
-                    
+                      
             else:
                 bacActive = "No active bacteria filter"
-                #Filter for active range filter, if active
-                if (r1 or r2) != -42:
-                    data = dataOld[range_]
-                    
+            
+            #Check for active range   
+            if type(rangeActive)==list:
+                data = data[range_]    
+    else:
+        data = data
+    
     #Contain conditions from filter function in list
     conditions = [bacActive,rangeActive,bacList,range_]
-        
+    
     return data,conditions
+data,conditions = filterData("Bacteria filter",dataOld,conditions)
+
+#Think about what kind of "data" there is in data right now in line 128
+#Check the else at Line 131, should keep the same data
+#Maybe add current data as input as well, so we can keep that. Yes I do that
