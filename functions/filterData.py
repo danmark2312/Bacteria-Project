@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from functions.userinput import displayMenu,inputNumber
+from functions.userinput import displayMenu,inputNumber,header
 import numpy as np
 
-def filterActive(bacActive,rangeActive):
+def printFilter(bacActive,rangeActive):
     """
     INPUT:
         bacActive: A list specifying the active bacteria filters, if none
@@ -20,18 +20,27 @@ def filterActive(bacActive,rangeActive):
     #Print active filters if any
         print("""
 =======================================================
+                     ACTIVE FILTERS
+         
 Current filters:
-Bacteria: {} | Range: {}
+Bacteria: {} 
+Range: {}
 =======================================================
                       """.format(bacActive,rangeActive))
     
 
-def filterData(filtertype,dataOld):
+def filterData(filtertype,dataOld,bacActive,rangeActive):
     """
     INPUT:
         filtertype: A string specifying how to filter the data
         
         dataOld: unfiltered data
+    
+        bacActive: A list specifying the active bacteria filters, if none
+            then it is a string stating there is no active filter of given type
+            
+        rangeActive: A list specifying the active range filter, if none
+            then it is a string stating there is no active filter of given type
         
     OUTPUT:
         data: Filtered data
@@ -52,13 +61,16 @@ def filterData(filtertype,dataOld):
           "Brochothrix thermosphacta"]
     r1,r2 = -42,-42
     bacList = np.array([],dtype=int)
-    bacActive = "No active bacteria filter"
-    rangeActive = "No active range filter"
+    
+    #Check for already active filters
+    if (type(bacActive) == np.ndarray) and (type(rangeActive) == list): 
+        bacActive = "No active bacteria filter"
+        rangeActive = "No active range filter"
     
     #Range filter    
     if filtertype == "Range filter":
-        print("""
-\nYou have chosen to filter for range.
+        header("RANGE FILTER MENU")
+        print("""You have chosen to filter for range.
 Select a range of -1 to clear rangefilter\n""")
         
         while (r1 or r2) != -1:
@@ -89,19 +101,19 @@ Select a range of -1 to clear rangefilter\n""")
    
     #Bacteria filter
     if filtertype == "Bacteria filter":
-        
+        header("BACTERIA FILTER MENU") #Interaface
         print("""
-\nYou have chosen to filter for bacteria.
+You have chosen to filter for bacteria.
 Select the bacteria you want to filter
 If it is already a filter, it will be removed\n""")
                 
         while True:
+            printFilter(bacActive,rangeActive) #Print filter
+            menu = int(displayMenu(bacStr+["Quit"])) #Display a menu
             
-            filterActive(bacActive,rangeActive)
-            
-            menu = int(displayMenu(bacStr+["Quit"]))
             #Quit
             if menu == 5:
+                data = dataOld
                 break
             
             #Check if menu (bacteria chosen) is in bacList
