@@ -117,13 +117,13 @@ If it is already a filter, it will be removed\n""")
             
             else:
                 bacList = np.append(bacList,menu) #Add to list
+                bacActive = np.array(bacStr)[bacList-1] #Active bacteria filter
             
             #Check if there is an active filter
             if len(bacList)!=0:
                 #Filter from data
                 mask = np.in1d(dataOld[:,2],bacList) #Where each value of bacList is in dataOld
                 data = dataOld[mask] #Filter from mask
-                bacActive = np.array(bacStr)[bacList-1] #Active bacteria filter
                 #Check for active range
                 if type(rangeActive)==list:
                     data = dataOld[range_]
@@ -138,4 +138,3 @@ If it is already a filter, it will be removed\n""")
     conditions = [bacActive,rangeActive,bacList,range_]
         
     return data,conditions
-
