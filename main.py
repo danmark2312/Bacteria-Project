@@ -21,11 +21,10 @@ rangeActive = "No active range filter"
 
 #Keep menu until user quits
 while True:
-    #Print any active filters
-    printFilter(bacActive,rangeActive)
     header("MAIN MENU") #Interface
+    printFilter(bacActive,rangeActive) #Print any active filters
     #User Menu
-    menu = displayMenu(["Load data","Filter data","Display statistics", "Generate plots", "Quit"])
+    menu = displayMenu(["Load data","Filter data","Display statistics", "Generate plots", "Show data", "Quit"])
     
     #Load data
     if menu == 1:
@@ -100,8 +99,15 @@ while True:
         dataPlot(data)
         print("")
     
-    #Break
-    elif menu == 5:
+    #Show all data
+    elif (menu == 5) and dataLoaded:
+        np.set_printoptions(threshold=np.inf)
+        print(data)
+        np.set_printoptions(threshold=5000)
+        
+        
+    #Quit
+    elif menu == 6:
         break
     
     #No data loaded msg

@@ -61,6 +61,7 @@ def filterData(filtertype,dataOld,bacActive,rangeActive):
           "Brochothrix thermosphacta"]
     r1,r2 = -42,-42
     bacList = np.array([],dtype=int)
+    data = dataOld
     
     #Check for already active filters
     if (type(bacActive) == np.ndarray) and (type(rangeActive) == list): 
@@ -102,8 +103,7 @@ Select a range of -1 to clear rangefilter\n""")
     #Bacteria filter
     if filtertype == "Bacteria filter":
         header("BACTERIA FILTER MENU") #Interaface
-        print("""
-You have chosen to filter for bacteria.
+        print("""You have chosen to filter for bacteria.
 Select the bacteria you want to filter
 If it is already a filter, it will be removed\n""")
                 
@@ -113,7 +113,6 @@ If it is already a filter, it will be removed\n""")
             
             #Quit
             if menu == 5:
-                data = dataOld
                 break
             
             #Check if menu (bacteria chosen) is in bacList
