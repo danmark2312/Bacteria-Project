@@ -8,6 +8,23 @@ This file contains multiple functions that contribute to userinput
 """
 import numpy as np
 
+def header(headerString):
+    """
+    Prints a header for displayMenu
+    
+    INPUT:
+        headerString = A string for the header
+    
+    OUTPUT:
+        A printed version of headerString
+    
+    """
+    
+    print("""
+====================
+{}
+====================\n""".format(headerString))
+
 def inputStr(prompt):
     """
     Userinput that only allows strings
