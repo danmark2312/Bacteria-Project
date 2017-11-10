@@ -16,20 +16,19 @@ import numpy as np
 
 #Initial variables
 dataLoaded = False
-bacActive = "No active bacteria filter"
-rangeActive = "No active range filter"
+conditions = ["No active bacteria filter","No active range filter",np.array([],dtype=int),None]
 
 #Keep menu until user quits
 while True:
     header("MAIN MENU") #Interface
-    printFilter(bacActive,rangeActive) #Print any active filters
+    printFilter(conditions[0],conditions[1]) #Print any active filters
     #User Menu
     menu = displayMenu(["Load data","Filter data","Display statistics", "Generate plots", "Show data", "Quit"])
     
     #Load data
     if menu == 1:
         #Check for correct filename
-        header("LOAD DATA MENU")
+        header("LOAD DATA MENU") #Interface
         print("If you wish to exit, type 'exit'")
         while True:
             try:
@@ -54,20 +53,20 @@ while True:
     #Filter data
     elif (menu == 2) and dataLoaded:
         while True:
-            header("FILTER MENU")
+            header("FILTER MENU") #Interface
             print("Please specify a filter")
             #Print any active filters
-            printFilter(bacActive,rangeActive)
+            printFilter(conditions[0],conditions[1])
             
             menu2 = displayMenu(["Bacteria filter","Range filter","Back"])
             
             #Bacteria type filter
             if menu2 == 1:
-                data,bacActive,rangeActive = filterData("Bacteria filter",dataOld,bacActive,rangeActive)
+                data,conditions = filterData("Bacteria filter",dataOld,conditions)
                
             #Range filter
             elif menu2 == 2:
-                data,bacActive,rangeActive = filterData("Range filter",dataOld,bacActive,rangeActive)
+                data,conditions = filterData("Range filter",dataOld,conditions)
             
             #Back
             elif menu2 == 3:
@@ -79,10 +78,10 @@ while True:
         statStr = ["Mean Temperature","Mean Growth rate","Std Temperature","Std Growth rate",
                              "Rows","Mean Cold Growth rate","Mean Hot Growth rate","Back"]
         
-        header("STATISTICS MENU")
+        header("STATISTICS MENU") #Interface
         while True:   
             #Print any active filters
-            printFilter(bacActive,rangeActive)
+            printFilter(conditions[0],conditions[1])
             menu2 = displayMenu(statStr) #Show different statistics to be computed
             if menu2 == 8: #Quit
                 break
@@ -102,8 +101,9 @@ while True:
     #Show all data
     elif (menu == 5) and dataLoaded:
         np.set_printoptions(threshold=np.inf)
+        np.set_printoptions(suppress=True)
         print(data)
-        np.set_printoptions(threshold=5000)
+        np.set_printoptions(threshold=8)
         
         
     #Quit
