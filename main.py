@@ -17,8 +17,7 @@ For the sake of the user, a menu header has been added to each menu as well
 in order to make navigation easier.
 
 TO DO:
-    - Add temperature filter
-    - Add pie chart to show distribution of bacteria
+    - Add temperature filter (Emil kan lave dette, så sætter man sig automatisk også ind i koden)
     - Add min and max values in statistics
     - Potentially tkinter
 
@@ -96,22 +95,25 @@ while True:
     
     #Display statistics
     elif (menu == 3) and dataLoaded:
-        statStr = ["Mean Temperature","Mean Growth rate","Std Temperature","Std Growth rate",
-                             "Rows","Mean Cold Growth rate","Mean Hot Growth rate","Back"]
+        statStr = ["Mean Temperature","Mean Growth rate","Std Temperature",
+                   "Std Growth rate", "Rows","Mean Cold Growth rate",
+                   "Mean Hot Growth rate","Minimum Values", "Maximum Values","Back"]
         
         header("STATISTICS MENU") #Interface
         while True:   
             #Print any active filters
             printFilter(conditions[0],conditions[1])
             menu2 = displayMenu(statStr) #Show different statistics to be computed
-            if menu2 == 8: #Quit
+            if menu2 == 10: #Quit
                 break
             else:
                 stat = dataStatistics(data,statStr[int(menu2-1)]) #Compute statistic
             
             #Print statistic
             print("""\n==================================================   
-{} | {}
+{}
+--------------------------------------------------
+{}
 ==================================================\n""".format(statStr[int(menu2-1)],stat))
             
     #Generate plots
