@@ -18,8 +18,7 @@ def printFilter(bacActive,rangeActive):
     
     if (type(bacActive) == np.ndarray) or (type(rangeActive) == list): 
     #Print active filters if any
-        print("""
-=======================================================
+        print("""=======================================================
                      ACTIVE FILTERS
          
 Current filters:
@@ -29,12 +28,14 @@ Range: {}
                       """.format(bacActive,rangeActive))
     
 
-def filterData(filtertype,dataOld,conditions):
+def filterData(filtertype,data,dataOld,conditions):
     """
     INPUT:
         filtertype: A string specifying how to filter the data
         
-        dataOld: unfiltered data
+        data: Current data
+        
+        dataOld: Unfiltered data
     
         conditions: Collection of filtering information       
         
@@ -58,43 +59,34 @@ def filterData(filtertype,dataOld,conditions):
     rangeActive = conditions[1]
     bacList = conditions[2]
     range_ = conditions[3]
+    mask = conditions[4]
         
     #Range filter    
     if filtertype == "Range filter":
-        header("RANGE FILTER MENU")
+        header("RANGE FILTER MENU") #Interface
         print("""You have chosen to filter for range.
 Select a range of -1 to clear rangefilter""")
         
-        while (r1 or r2) != -1:
-            r1 = inputNumber("Please enter a lower range: ")            
-            r2 = inputNumber("Please enter a upper range: ")
-           #Get min and max, just in case user is retarded
-            upperRange = max(r1,r2)
-            lowerRange = min(r1,r2)
-            
-            #Get data in the range and filter it
-            range_ = ((lowerRange < dataOld[:,1]) & (dataOld[:,1] < upperRange))        
-     
-            data = dataOld[range_]
-            rangeActive = [lowerRange,upperRange]
-            break
+        r1 = inputNumber("Please enter a lower range: ")            
+        r2 = inputNumber("Please enter a upper range: ")
+        #Get min and max, just in case user is retarded
+        upperRange = max(r1,r2)
+        lowerRange = min(r1,r2)
+        
+        #Define the active range 
+        rangeActive = [lowerRange,upperRange]
         
         #Check if user wants to clear the range
         if (r1 or r2) == -1:
-            data = dataOld #Set old data
             #Reset range variables
             rangeActive = "No active range filter"
             r1,r2 = -42,-42
-            
-        #Filter for bacteria type, if active
-        if type(bacActive) == np.ndarray:
-            mask = np.in1d(data[:,2],bacList) #Where each value of bacList is in dataOld
-            data = data[mask] #Filter from mask
+
             
    
     #Bacteria filter
     elif filtertype == "Bacteria filter":
-        header("BACTERIA FILTER MENU") #Interaface
+        header("BACTERIA FILTER MENU") #Interface
         print("""You have chosen to filter for bacteria.
 Select the bacteria you want to filter
 If it is already a filter, it will be removed\n""")
@@ -109,34 +101,32 @@ If it is already a filter, it will be removed\n""")
             
             #Check if menu (bacteria chosen) is in bacList
             if menu in bacList:
-                bacList = bacList[bacList != menu] #Remove from list
-                bacActive = np.array(bacStr)[bacList-1] #Active bacteria filter
+                bacList = bacList[bacList != menu] #Remove from array
             
             else:
-                bacList = np.append(bacList,menu) #Add to list
-                bacActive = np.array(bacStr)[bacList-1] #Active bacteria filter
+                bacList = np.append(bacList,menu) #Add to array
             
-            #Check if there is an active filter
-            if len(bacList)!=0:
-                #Filter from data
-                mask = np.in1d(dataOld[:,2],bacList) #Where each value of bacList is in dataOld
-                data = dataOld[mask] #Filter from mask
-                      
-            else:
-                bacActive = "No active bacteria filter"
+            bacActive = np.array(bacStr)[bacList-1] #Active bacteria filter
             
-            #Check for active range   
-            if type(rangeActive)==list:
-                data = data[range_]    
+            if len(bacActive) == 0:
+                bacActive = "No active bacteria filter" 
+
+    #Use mask and range_ to filter data if filter is active (specific type)
+    if type(bacActive) != str:
+        mask = np.in1d(dataOld[:,2],bacList) #Where each value of bacList is in dataOld
+        data = dataOld[mask] #Masking from unfiltered data
+        
     else:
-        data = data
+        data = dataOld #Data is the same as old
+    
+    if type(rangeActive) != str:
+        range_ = ((lowerRange < data[:,1]) & (data[:,1] < upperRange))   
+        data = data[range_] #Data is filtered for range
+        
+    if not (type(bacActive) != str) or (type(rangeActive) != str):
+        data = data #No changes to data, but it is pre-filtered
     
     #Contain conditions from filter function in list
-    conditions = [bacActive,rangeActive,bacList,range_]
+    conditions = [bacActive,rangeActive,bacList,range_,mask]
     
     return data,conditions
-data,conditions = filterData("Bacteria filter",dataOld,conditions)
-
-#Think about what kind of "data" there is in data right now in line 128
-#Check the else at Line 131, should keep the same data
-#Maybe add current data as input as well, so we can keep that. Yes I do that
