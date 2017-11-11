@@ -16,7 +16,7 @@ import numpy as np
 
 #Initial variables
 dataLoaded = False
-conditions = ["No active bacteria filter","No active range filter",np.array([],dtype=int),None]
+conditions = ["No active bacteria filter","No active range filter",np.array([],dtype=int),None,None]
 
 #Keep menu until user quits
 while True:
@@ -62,11 +62,11 @@ while True:
             
             #Bacteria type filter
             if menu2 == 1:
-                data,conditions = filterData("Bacteria filter",dataOld,conditions)
+                data,conditions = filterData("Bacteria filter",data,dataOld,conditions)
                
             #Range filter
             elif menu2 == 2:
-                data,conditions = filterData("Range filter",dataOld,conditions)
+                data,conditions = filterData("Range filter",data,dataOld,conditions)
             
             #Back
             elif menu2 == 3:
