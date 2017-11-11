@@ -36,6 +36,20 @@ def dataPlot(data):
     plt.title("Number of bacteria") #Set title
     plt.show() #Show
     
+    #Plot "Distribution of bacteria"
+    plt.figure(figsize=(6,6)) #Set 1:1 ratio
+    
+    #Function to make pretty percentages
+    def make_autopct(values):
+        def my_autopct(pct):
+            total = sum(values)
+            val = int(round(pct*total/100.0))
+            return '{p:.2f}%  ({v:d})'.format(p=pct,v=val)
+        return my_autopct
+    
+    explode = np.linspace(0.06,0.06,len(y)) #Create array of len(y) with 0.05 values
+    plt.pie(y,labels=bacStr,shadow=True,explode=explode,autopct=make_autopct(y)) #Plot pie chart
+    plt.show() #Show plot
     
     #Plot "Growth rate by temperature"
   
