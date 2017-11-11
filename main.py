@@ -16,6 +16,11 @@ The user will be informed of any ACTIVE filters throughout the menus.
 For the sake of the user, a menu header has been added to each menu as well
 in order to make navigation easier.
 
+TO DO:
+    - Add temperature filter
+    - Add pie chart to show distribution of bacteria
+    - Add min and max values in statistics
+    - Potentially tkinter
 
 """
 
