@@ -45,7 +45,7 @@ def filterData(filtertype,data,dataOld,conditions):
         conditions: Collection of filtering information  
         
     USAGE:
-        data,conditions = filterData(filtertype,dataOld,conditions)
+        data,conditions = filterData(filtertype,data,dataOld,conditions)
     
     Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
     """
@@ -94,7 +94,6 @@ If it is already a filter, it will be removed\n""")
             #Check if menu (bacteria chosen) is in bacList
             if menu in bacList:
                 bacList = bacList[bacList != menu] #Remove from array
-            
             else:
                 bacList = np.append(bacList,menu) #Add to array
             
