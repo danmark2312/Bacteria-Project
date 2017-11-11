@@ -54,7 +54,7 @@ def dataPlot(data):
         if len(mat) != 0:    
             x,y = mat[:,0],mat[:,1] #get x and y axis
         
-            plt.plot(x,y, label=bacStr[int(bac)]) #plot graph
+            plt.plot(x,y, label=bacStr[int(bac)-1]) #plot graph
     
     plt.legend(bbox_to_anchor=(1.05, 0.65), loc=2, borderaxespad=0.) #Set legend
     
