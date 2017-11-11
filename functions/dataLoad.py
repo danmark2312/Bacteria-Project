@@ -1,19 +1,22 @@
-"""
 
-INPUT: 
-    
-OUTPUT:
-    
-USAGE:
-    
-
-Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
-"""
 
 import csv
 import numpy as np
 
 def dataLoad(filename):
+    """
+    INPUT:
+        filename: A string containing the full filename (with extension) of a datafile
+        
+    OUTPUT:
+        data: An N x 3 matrix
+        
+    USAGE:
+        data = dataLoad(filename)
+        
+    
+    Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
+    """
     
     #Initial variables
     data = [0,0,0]
