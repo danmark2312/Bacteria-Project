@@ -52,7 +52,6 @@ def filterData(filtertype,data,dataOld,conditions):
     #Initial variables
     bacStr = ["Salmonella enterica","Bacillus cereus","Listeria",
           "Brochothrix thermosphacta"]
-    r1,r2 = -42,-42
     
     #Extracting variables from condition list
     bacActive = conditions[0]
@@ -69,20 +68,13 @@ Select a range of -1 to clear rangefilter""")
         
         r1 = inputNumber("Please enter a lower range: ")            
         r2 = inputNumber("Please enter a upper range: ")
-        #Get min and max, just in case user is retarded
-        upperRange = max(r1,r2)
-        lowerRange = min(r1,r2)
-        
-        #Define the active range 
-        rangeActive = [lowerRange,upperRange]
+        #Get min and max, in case of wrong order
+        rangeActive = [min(r1,r2),max(r1,r2)]
         
         #Check if user wants to clear the range
         if (r1 or r2) == -1:
             #Reset range variables
             rangeActive = "No active range filter"
-            r1,r2 = -42,-42
-
-            
    
     #Bacteria filter
     elif filtertype == "Bacteria filter":
@@ -120,7 +112,7 @@ If it is already a filter, it will be removed\n""")
         data = dataOld #Data is the same as old
     
     if type(rangeActive) != str:
-        range_ = ((lowerRange < data[:,1]) & (data[:,1] < upperRange))   
+        range_ = ((rangeActive[0] < data[:,1]) & (data[:,1] < rangeActive[1]))   
         data = data[range_] #Data is filtered for range
         
     if not (type(bacActive) != str) or (type(rangeActive) != str):
