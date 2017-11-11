@@ -1,6 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-COMMENT ON MAIN SCRIPT
+This is the main script of the project.
+
+It prints a series of menus for the user to navigate in.
+
+It can do the following:
+    - Load data
+    - Filter data
+    - Display statistics
+    - Generate plots
+    - Show data
+
+The user will be informed of any ACTIVE filters throughout the menus.
+
+For the sake of the user, a menu header has been added to each menu as well
+in order to make navigation easier.
+
+
 """
 
 
@@ -63,7 +79,7 @@ while True:
             #Bacteria type filter
             if menu2 == 1:
                 data,conditions = filterData("Bacteria filter",data,dataOld,conditions)
-               
+                
             #Range filter
             elif menu2 == 2:
                 data,conditions = filterData("Range filter",data,dataOld,conditions)
