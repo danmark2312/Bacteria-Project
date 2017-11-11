@@ -18,7 +18,6 @@ in order to make navigation easier.
 
 TO DO:
     - Add temperature filter (Emil kan lave dette, så sætter man sig automatisk også ind i koden)
-    - Add min and max values in statistics
     - Potentially tkinter
 
 """
