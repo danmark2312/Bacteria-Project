@@ -25,8 +25,9 @@ def dataPlot(data):
     
     #Plot "Number of bacteria"
     x,y = np.unique(data[:,2],return_counts=True) #get x and y values
-    bacStr = ["Salmonella enterica","Bacillus cereus","Listeria",
-             "Brochothrix thermosphacta"] #x-labes
+    x = x.astype(int) #Convert to integers
+    bacStr = np.array(["Salmonella enterica","Bacillus cereus","Listeria",
+             "Brochothrix thermosphacta"]) #x-labes
     prop_iter = iter(plt.rcParams['axes.prop_cycle']) #Iterate through colors
     
     for i in range(0,len(x)):
@@ -36,20 +37,22 @@ def dataPlot(data):
     plt.title("Number of bacteria") #Set title
     plt.show() #Show
     
-    #Plot "Distribution of bacteria"
-    plt.figure(figsize=(6,6)) #Set 1:1 ratio
-    
-    #Function to make pretty percentages
-    def make_autopct(values):
-        def my_autopct(pct):
-            total = sum(values)
-            val = int(round(pct*total/100.0))
-            return '{p:.2f}%  ({v:d})'.format(p=pct,v=val)
-        return my_autopct
-    
-    explode = np.linspace(0.06,0.06,len(y)) #Create array of len(y) with 0.05 values
-    plt.pie(y,labels=bacStr,shadow=True,explode=explode,autopct=make_autopct(y)) #Plot pie chart
-    plt.show() #Show plot
+    #Plot "Distribution of bacteria", only if relevant
+    if len(y) > 1:
+        plt.figure(figsize=(6,6)) #Set 1:1 ratio
+        
+        #Function to make pretty percentages
+        def make_autopct(values):
+            def my_autopct(pct):
+                total = sum(values)
+                val = int(round(pct*total/100.0))
+                return '{p:.2f}%  ({v:d})'.format(p=pct,v=val)
+            return my_autopct
+        
+        explode = np.linspace(0.06,0.06,len(y)) #Create array of len(y) with 0.05 values
+        plt.pie(y,labels=bacStr[x-1],shadow=True,explode=explode,autopct=make_autopct(y)) #Plot pie chart
+        plt.title("Distribution of bacteria types")
+        plt.show() #Show plot
     
     #Plot "Growth rate by temperature"
   

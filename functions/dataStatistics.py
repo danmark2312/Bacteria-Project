@@ -15,6 +15,8 @@ def dataStatistics(data,statistics):
             "Rows"
             "Mean Cold Growth rate"
             "Mean Hot Growth rate"
+            "Minimum values"
+            "Maximum values"
             "Back"
     OUTPUT:
         result = A float representing the given statistic
@@ -54,5 +56,11 @@ def dataStatistics(data,statistics):
     elif statistics == "Mean Hot Growth rate":
         index2 = np.where(data[:,0]>50)
         result=np.mean(data[index2,1])
-        
+    
+    elif statistics == "Minimum Values":
+        result = "Temperature: {:f} | Growth rate: {:f}".format(min(data[:,0]),min(data[:,1]))
+    
+    elif statistics == "Maximum Values":
+        result = "Temperature: {:f} | Growth rate: {:f}".format(max(data[:,0]),max(data[:,1]))
+    
     return result
