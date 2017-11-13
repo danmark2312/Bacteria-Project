@@ -69,4 +69,3 @@ def dataPlot(data):
     plt.legend(bbox_to_anchor=(1.05, 0.65), loc=2, borderaxespad=0.) #Set legend
     plt.title("Growth rate by temperature") #Set title
     plt.show() #Show
-dataPlot(data)
