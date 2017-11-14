@@ -68,6 +68,32 @@ def inputNumber(prompt):
             print("Not valid number. Please try again")
     return num
 
+def inputRange(prompt):
+    """
+    Userinput that only allows any number or the string, "clear", and converts them to float values
+
+    INPUT:
+        prompt: any number or "clear"
+
+    OUTPUT:
+        num = Float or string "clear"
+
+    USAGE:
+        inputStr("Please enter a number: ")
+    """
+    while True:
+        try:
+            num = input(prompt) #Get input
+            num = float(num) #Try to make a float value
+            break
+        except ValueError:
+            if num == "clear": #If it is clear, break
+                num = "clear"
+                break
+            else:    
+                print("Not valid number. Please try again")
+    return num
+
 def displayMenu(options):
     """
     DISPLAYMENU Displays a menu of options, ask the user to choose an item
