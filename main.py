@@ -55,7 +55,7 @@ while True:
                 print("") #Add space
                 
                 #Check for exit
-                if filename != "exit":
+                if filename.lower() != "exit":
                     data = dataLoad(filename) #Load data
                     print("\nData loaded succesfully from",filename)
                     dataLoaded = True #Set data as loaded
@@ -73,7 +73,7 @@ while True:
     elif (menu == 2) and dataLoaded:
         while True:
             header("FILTER MENU") #Interface
-            print("Please specify a filter")
+            print("Please choose a filter")
             #Print any active filters
             printFilter(conditions[0],conditions[1])
             
