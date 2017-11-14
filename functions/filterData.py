@@ -111,14 +111,14 @@ If it is already a filter, it will be removed\n""")
                 bacActive = "No active bacteria filter" 
 
     #Use mask and range_ to filter data if filter is active (specific type)
-    if type(bacActive) != str:
+    if type(bacActive) != str: #For bacteria
         mask = np.in1d(dataOld[:,2],bacList) #Where each value of bacList is in dataOld
         data = dataOld[mask] #Masking from unfiltered data
         
     else:
         data = dataOld #Data is the same as old
     
-    if type(rangeActive) != str:
+    if type(rangeActive) != str: #For range
         range_ = ((rangeActive[0] < data[:,1]) & (data[:,1] < rangeActive[1]))   
         data = data[range_] #Data is filtered for range
         
