@@ -50,5 +50,3 @@ def dataLoad(filename):
     data = data[1:len(data)] #Remove placeholder of [0,0,0]
 
     return data
-
-dataLoad("test.txt")
