@@ -93,9 +93,9 @@ If it is already a filter, it will be removed\n""")
                 
         while True:
             printFilter(bacActive,rangeActive) #Print filter
-            menu = int(displayMenu(bacStr+["Quit"])) #Display a menu
+            menu = int(displayMenu(bacStr+["Back"])) #Display a menu
             
-            #Quit
+            #Back
             if menu == 5:
                 break
             

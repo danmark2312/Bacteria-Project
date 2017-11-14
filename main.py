@@ -108,6 +108,8 @@ while True:
             else:
                 stat = dataStatistics(data,statStr[int(menu2-1)]) #Compute statistic
             
+            if stat == "nan":
+                stat = "Not a number"
             #Print statistic
             print("""\n==================================================   
 {}

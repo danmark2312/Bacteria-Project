@@ -91,7 +91,7 @@ def inputRange(prompt):
                 num = "clear"
                 break
             else:    
-                print("Not valid number. Please try again")
+                print("Not a valid number. Please try again")
     return num
 
 def displayMenu(options):
@@ -117,6 +117,8 @@ def displayMenu(options):
     #Get menu choice
     while not choice in np.arange(1,len(options)+1):
         choice = inputNumber("Please choose a menu item: ")
+        if choice > len(options):
+            print("\nChoice out of menu range")
 
     return choice
 

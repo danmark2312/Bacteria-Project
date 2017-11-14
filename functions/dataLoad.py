@@ -25,9 +25,10 @@ def dataLoad(filename):
     #Append each row to dataRaw
     with open(filename, newline='') as inputfile:
         for line,row in enumerate(csv.reader(inputfile)):
-            if len(row) == 3: #Only read line if len is three                
-                arr = np.array(row[0].split(" "), dtype=float) #Creating an array of row
-    
+            
+            arr = np.array(row[0].split(" "), dtype=float) #Creating an array of row
+            
+            if len(arr) == 3: #Only read line if len is three                
                 #Checking for error conditions
                 if ((10 > arr[0]) or (arr[0] > 60)): #Temperature
                     read = False #Do not read line
@@ -44,8 +45,10 @@ def dataLoad(filename):
                 
                 if read:
                     data = np.vstack((data,arr)) #Stack row into N x 3 matrix
-              
-                read = True #reset read
+            
+            else:
+                print("Erroneous line at line:",line+1,"Length of row was not 3")
+                
                 
     data = data[1:len(data)] #Remove placeholder of [0,0,0]
 
