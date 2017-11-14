@@ -134,4 +134,4 @@ while True:
     
     #No data loaded msg
     else:
-        print("\nERROR: No data has been loaded\n")
+        print("\nERROR: No data has been loaded")
