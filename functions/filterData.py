@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from functions.userinput import displayMenu,inputRange,header
+from functions.userinput import displayMenu,inputLimit,header
 import numpy as np
 
 def printFilter(bacActive,rangeActive):
@@ -68,13 +68,13 @@ def filterData(filtertype,data,dataOld,conditions):
 Type "clear" to clear range""")
         
         while True:
-            r1 = inputRange("Please enter a lower limit: ") 
+            r1 = inputLimit("Please enter a lower limit: ") 
             #Break if clear
             if r1 == "clear":
                 rangeActive = "No active range filter"
                 break
             
-            r2 = inputRange("Please enter an upper limit: ")
+            r2 = inputLimit("Please enter an upper limit: ")
             #Break if clear
             if r2 == "clear":
                 rangeActive = "No active range filter"
