@@ -68,7 +68,7 @@ def inputNumber(prompt):
             print("Not valid number. Please try again")
     return num
 
-def inputRange(prompt):
+def inputLimit(prompt):
     """
     Userinput that only allows any number or the string, "clear", and converts them to float values
 
@@ -117,7 +117,7 @@ def displayMenu(options):
     #Get menu choice
     while not choice in np.arange(1,len(options)+1):
         choice = inputNumber("Please choose a menu item: ")
-        if choice > len(options):
+        if choice > len(options) or choice <= 0:
             print("\nChoice out of menu range")
 
     return choice
