@@ -16,10 +16,6 @@ The user will be informed of any ACTIVE filters throughout the menus.
 For the sake of the user, a menu header has been added to each menu as well
 in order to make navigation easier.
 
-TO DO:
-    - Add temperature filter (Emil kan lave dette, så sætter man sig automatisk også ind i koden)
-    - Potentially tkinter
-
 """
 
 
@@ -55,7 +51,7 @@ while True:
                 print("") #Add space
                 
                 #Check for exit
-                if filename != "exit":
+                if filename.lower() != "exit":
                     data = dataLoad(filename) #Load data
                     print("\nData loaded succesfully from",filename)
                     dataLoaded = True #Set data as loaded
@@ -73,7 +69,7 @@ while True:
     elif (menu == 2) and dataLoaded:
         while True:
             header("FILTER MENU") #Interface
-            print("Please specify a filter")
+            print("Please choose a filter")
             #Print any active filters
             printFilter(conditions[0],conditions[1])
             
@@ -108,6 +104,8 @@ while True:
             else:
                 stat = dataStatistics(data,statStr[int(menu2-1)]) #Compute statistic
             
+            if np.isnan(stat):
+                stat = "Not a number"
             #Print statistic
             print("""\n==================================================   
 {}
@@ -134,4 +132,4 @@ while True:
     
     #No data loaded msg
     else:
-        print("\nERROR: No data has been loaded\n")
+        print("\nERROR: No data has been loaded")

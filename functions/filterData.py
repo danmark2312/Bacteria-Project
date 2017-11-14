@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from functions.userinput import displayMenu,inputNumber,header
+from functions.userinput import displayMenu,inputLimit,header
 import numpy as np
 
 def printFilter(bacActive,rangeActive):
@@ -52,29 +52,37 @@ def filterData(filtertype,data,dataOld,conditions):
     #Initial variables
     bacStr = ["Salmonella enterica","Bacillus cereus","Listeria",
           "Brochothrix thermosphacta"]
+    r1,r2 = None,None
     
     #Extracting variables from condition list
-    bacActive = conditions[0]
-    rangeActive = conditions[1]
-    bacList = conditions[2]
-    range_ = conditions[3]
-    mask = conditions[4]
+    bacActive = conditions[0] #Active bacteria filters
+    rangeActive = conditions[1] #Active range filters
+    bacList = conditions[2] #Array of bacteria types, integers
+    range_ = conditions[3] #Boolean array where range was true
+    mask = conditions[4] #Boolean array where bacList is in data
         
     #Range filter    
     if filtertype == "Range filter":
         header("RANGE FILTER MENU") #Interface
         print("""You have chosen to filter for range.
-Select a range of -1 to clear rangefilter""")
+Type "clear" to clear range""")
         
-        r1 = inputNumber("Please enter a lower range: ")            
-        r2 = inputNumber("Please enter a upper range: ")
-        #Get min and max, in case of wrong order
-        rangeActive = [min(r1,r2),max(r1,r2)]
-        
-        #Check if user wants to clear the range
-        if (r1 or r2) == -1:
-            #Reset range variables
-            rangeActive = "No active range filter"
+        while True:
+            r1 = inputLimit("Please enter a lower limit: ") 
+            #Break if clear
+            if r1 == "clear":
+                rangeActive = "No active range filter"
+                break
+            
+            r2 = inputLimit("Please enter an upper limit: ")
+            #Break if clear
+            if r2 == "clear":
+                rangeActive = "No active range filter"
+                break
+                
+            #Get min and max, in case of wrong order
+            rangeActive = [min(r1,r2),max(r1,r2)]
+            break
    
     #Bacteria filter
     elif filtertype == "Bacteria filter":
@@ -85,9 +93,9 @@ If it is already a filter, it will be removed\n""")
                 
         while True:
             printFilter(bacActive,rangeActive) #Print filter
-            menu = int(displayMenu(bacStr+["Quit"])) #Display a menu
+            menu = int(displayMenu(bacStr+["Back"])) #Display a menu
             
-            #Quit
+            #Back
             if menu == 5:
                 break
             
@@ -103,14 +111,14 @@ If it is already a filter, it will be removed\n""")
                 bacActive = "No active bacteria filter" 
 
     #Use mask and range_ to filter data if filter is active (specific type)
-    if type(bacActive) != str:
+    if type(bacActive) != str: #For bacteria
         mask = np.in1d(dataOld[:,2],bacList) #Where each value of bacList is in dataOld
         data = dataOld[mask] #Masking from unfiltered data
         
     else:
         data = dataOld #Data is the same as old
     
-    if type(rangeActive) != str:
+    if type(rangeActive) != str: #For range
         range_ = ((rangeActive[0] < data[:,1]) & (data[:,1] < rangeActive[1]))   
         data = data[range_] #Data is filtered for range
         

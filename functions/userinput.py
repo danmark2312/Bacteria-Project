@@ -4,7 +4,7 @@ Created on Mon Oct  2 03:58:30 2017
 
 This file contains multiple functions that contribute to userinput
 
-@author: Simon Moe Sørensen, moe.simon@gmail.com
+Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
 """
 import numpy as np
 
@@ -68,28 +68,62 @@ def inputNumber(prompt):
             print("Not valid number. Please try again")
     return num
 
+def inputLimit(prompt):
+    """
+    Userinput that only allows any number or the string, "clear", and converts them to float values
+
+    INPUT:
+        prompt: any number or "clear"
+
+    OUTPUT:
+        num = Float or string "clear"
+
+    USAGE:
+        inputStr("Please enter a number: ")
+    """
+    while True:
+        try:
+            num = input(prompt) #Get input
+            num = float(num) #Try to make a float value
+            break
+        except ValueError:
+            if num == "clear": #If it is clear, break
+                num = "clear"
+                break
+            else:    
+                print("Not a valid number. Please try again")
+    return num
+
 def displayMenu(options):
     """
-    DISPLAYMENU Displays a menu of options, ask the user to choose an item
-    and returns the number of the menu item chosen.
-
-    Usage: choice = displayMenu(options)
-
-    Input options Menu options (array of strings)
-    Output choice Chosen option (integer)
-
-
-    Author: Mikkel N. Schmidt, mnsc@dtu.dk, 2015
+    
+    INPUT:
+        options: An array of strings
+        
+    OUTPUT:
+        menu: an integer of the user's choice
+    
+    USAGE:
+        menu = displayMenu(options)
     """
-
-    # Display menu options
+    
+    #Print menu
     for i in range(len(options)):
-        print("{:d}. {:s}".format(i+1, options[i]))
-
-    # Get a valid menu choice
-    choice = 0
-
-    while not(np.any(choice == np.arange(len(options))+1)):
-       choice = inputNumber("Please choose a menu item: ")
+        print("{}. {}".format(i+1,options[i]))
+    
+    #Initial variable
+    choice = None
+    
+    #Get menu choice
+    while not choice in np.arange(1,len(options)+1):
+        choice = inputNumber("Please choose a menu item: ")
+        if choice > len(options) or choice <= 0:
+            print("\nChoice out of menu range")
 
     return choice
+
+
+
+
+
+
