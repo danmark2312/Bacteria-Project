@@ -96,8 +96,6 @@ while True:
         
         header("STATISTICS MENU") #Interface
         while True:   
-            #Print any active filters
-            printFilter(conditions[0],conditions[1])
             menu2 = displayMenu(statStr) #Show different statistics to be computed
             if menu2 == 10: #Quit
                 break
@@ -112,6 +110,8 @@ while True:
 --------------------------------------------------
 {}
 ==================================================\n""".format(statStr[int(menu2-1)],stat))
+            #Print any active filters
+            printFilter(conditions[0],conditions[1])
             
     #Generate plots
     elif (menu == 4) and dataLoaded:
