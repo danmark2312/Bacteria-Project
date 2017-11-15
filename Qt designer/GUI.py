@@ -7,18 +7,18 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from functions.dataLoad import dataLoad
-from functions.dataPlot import dataPlot
-from functions.dataStatistics import dataStatistics
-from functions.userinput import displayMenu,inputStr,header
-from functions.filterData import filterData,printFilter
+#from functions.dataLoad import dataLoad
+#from functions.dataPlot import dataPlot
+#from functions.dataStatistics import dataStatistics
+#from functions.userinput import displayMenu,inputStr,header
+#from functions.filterData import filterData,printFilter
 import sys
 
 class Ui_MainWindow(object):
     def __init__(self):
         object.__init__(self)
         self.setupUi(self)
-        self.dataload()
+ #       self.dataload()
         
     
     def setupUi(self, Ui_MainWindow):
