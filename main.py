@@ -95,6 +95,8 @@ while True:
                    "Mean Hot Growth rate","Minimum Values", "Maximum Values","Back"]
         
         header("STATISTICS MENU") #Interface
+        #Print any active filters
+        printFilter(conditions[0],conditions[1])
         while True:   
             menu2 = displayMenu(statStr) #Show different statistics to be computed
             if menu2 == 10: #Quit
@@ -104,14 +106,17 @@ while True:
             
             if np.isnan(stat):
                 stat = "Not a number"
+                
+            #Print any active filters
+            printFilter(conditions[0],conditions[1])
+            
             #Print statistic
             print("""\n==================================================   
 {}
 --------------------------------------------------
 {}
 ==================================================\n""".format(statStr[int(menu2-1)],stat))
-            #Print any active filters
-            printFilter(conditions[0],conditions[1])
+            
             
     #Generate plots
     elif (menu == 4) and dataLoaded:
