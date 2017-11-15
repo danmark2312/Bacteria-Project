@@ -112,7 +112,7 @@ def displayMenu(options):
         print("{}. {}".format(i+1,options[i]))
     
     #Initial variable
-    choice = None
+    choice = 0
     
     #Get menu choice
     while not choice in np.arange(1,len(options)+1):
