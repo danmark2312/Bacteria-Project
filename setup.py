@@ -31,5 +31,6 @@ setup(  name = "Bacteria Data Analysis Project",
         version = "2.0",
         author = "Simon Moe Sørensen & Emil Ballermann",
         description = "This program analyses data from bacteria experiments",
+        icon="resources/Icon.png"
         options = {"build_exe": build_exe_options},
         executables = [Executable("GUI.py", base=base)])

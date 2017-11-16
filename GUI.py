@@ -9,7 +9,6 @@ filters data if needed and prints texts to display windows
 
 Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
 """
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
 from functions.dataLoad import dataLoad
