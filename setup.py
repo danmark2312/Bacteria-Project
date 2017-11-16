@@ -27,7 +27,7 @@ packages = ["numpy","matplotlib.pyplot","csv"]
 build_exe_options = {"packages": packages, "excludes": ["tkinter"],
                      "includes":additional_mods, "include_files":include_files}
 
-base = "Win32GUI"
+base = None
 
 setup(  name = "Bacteria Data Analysis Project",
         version = "1.0",
