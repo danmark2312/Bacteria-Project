@@ -31,12 +31,12 @@ import numpy as np
 
 #Initial variables
 dataLoaded = False
-conditions = ["No active bacteria filter","No active range filter",np.array([],dtype=int),None,None]
+conditions = ["No active bacteria filter","No active growth rate range filter","No active temperature range filter",np.array([],dtype=int),None,None]
 
 #Keep menu until user quits
 while True:
     header("MAIN MENU") #Interface
-    printFilter(conditions[0],conditions[1]) #Print any active filters
+    printFilter(conditions[0],conditions[1],conditions[2]) #Print any active filters
     #User Menu
     menu = displayMenu(["Load data","Filter data","Display statistics", "Generate plots", "Show data", "Quit"])
     
@@ -71,20 +71,24 @@ while True:
             header("FILTER MENU") #Interface
             print("Please choose a filter")
             #Print any active filters
-            printFilter(conditions[0],conditions[1])
+            printFilter(conditions[0],conditions[1],conditions[2])
             
-            menu2 = displayMenu(["Bacteria filter","Range filter","Back"])
+            menu2 = displayMenu(["Bacteria filter","Growth rate range filter","Temperature range filter","Back"])
             
             #Bacteria type filter
             if menu2 == 1:
                 data,conditions = filterData("Bacteria filter",data,dataOld,conditions)
                 
-            #Range filter
+            #Growth rate range filter
             elif menu2 == 2:
-                data,conditions = filterData("Range filter",data,dataOld,conditions)
+                data,conditions = filterData("Growth rate range filter",data,dataOld,conditions)
+            
+            #Temeperature range filter 
+            elif menu2 == 3:
+                data,conditions = filterData("Temperature range filter",data,dataOld,conditions)
             
             #Back
-            elif menu2 == 3:
+            elif menu2 == 4:
                 break
                         
     
@@ -96,7 +100,7 @@ while True:
         
         header("STATISTICS MENU") #Interface
         #Print any active filters
-        printFilter(conditions[0],conditions[1])
+        printFilter(conditions[0],conditions[1],conditions[2])
         while True:   
             menu2 = displayMenu(statStr) #Show different statistics to be computed
             if menu2 == 10: #Quit
@@ -104,11 +108,11 @@ while True:
             else:
                 stat = dataStatistics(data,statStr[int(menu2-1)]) #Compute statistic
             
-            if np.isnan(stat):
+            if (menu2 not in [8,9]) and np.isnan(stat):
                 stat = "Not a number"
                 
             #Print any active filters
-            printFilter(conditions[0],conditions[1])
+            printFilter(conditions[0],conditions[1],conditions[2])
             
             #Print statistic
             print("""\n==================================================   
