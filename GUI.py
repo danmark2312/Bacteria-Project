@@ -15,8 +15,6 @@ import numpy as np
 from functions.dataLoad import dataLoad
 from functions.dataPlot import dataPlot
 from functions.dataStatistics import dataStatistics
-from functions.userinput import inputStr
-from functions.filterData import filterData
 
 class App():
     #Run this when class is run
