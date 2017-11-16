@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-
 import numpy as np
 
 def dataStatistics(data,statistics):
@@ -14,8 +12,10 @@ def dataStatistics(data,statistics):
             "Std Growth rate"
             "Mean Cold Growth rate"
             "Mean Hot Growth rate"
-            "Min | max Growth rate"
-            "Min | max Temperature"
+            "Min Growth rate"
+            "Max Growth rate"
+            "Min Temperature"
+            "Max Temperature"
             "Rows"
     OUTPUT:
         result = A float representing the given statistic
@@ -27,7 +27,8 @@ def dataStatistics(data,statistics):
     """
     #Check for length of data
     if len(data) != 0:
-
+        #Initial variables
+        result = np.nan
         #Defining average temperature
         if statistics == "Mean Temperature":
             result=np.mean(data[:,0])
@@ -58,15 +59,17 @@ def dataStatistics(data,statistics):
             index2 = np.where(data[:,0]>50)
             result=np.mean(data[index2,1])
 
-        #Define minimum values for temp and growth rate
-        elif statistics == "Min | max Growth rate":
-            result = "{:f} | {:f}".format(min(data[:,0]),max(data[:,0]))
+        #Define minimum values for growth rate
+        elif statistics == "Min Growth rate":
+            result = min(data[:,0])
 
-        #Define maximum values for temp and growth rate
-        elif statistics == "Min | max Temperature":
-                result = "{:f} | {:f}".format(min(data[:,1]),max(data[:,1]))
+        elif statistics == "Max Growth rate":
+            result = max(data[:,0])
 
-    else:
-        result = np.nan
+        #Define maximum values for temp
+        elif statistics == "Min Temperature":
+            result = min(data[:,1])
 
+        elif statistics == "Max Temperature":
+            result = max(data[:,1])
     return result

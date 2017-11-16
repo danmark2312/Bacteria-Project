@@ -1,5 +1,13 @@
 """
-GUI SCRIPT!
+This script creates a GUI for the user to use in connection with analyzing
+data of bacteria growth rate at certain temperatures
+
+It consists of the class, App, that is called in the end of the script.
+
+App has multiple functions that creates a UI, binds buttons to functions,
+filters data if needed and prints texts to display windows
+
+Emil Ballermann (s174393) & Simon Moe Sørensen (s174420)
 """
 
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -10,8 +18,7 @@ from functions.dataStatistics import dataStatistics
 from functions.userinput import inputStr
 from functions.filterData import filterData
 
-class Ui_MainWindow():
-
+class App():
     #Run this when class is run
     def __init__(self):
         #Initial variables
@@ -62,25 +69,27 @@ class Ui_MainWindow():
             bacStr = ["Salmonella enterica","Bacillus cereus","Listeria",
                   "Brochothrix thermosphacta"] #List of bacteria names
             bac = sender.property("bacId") #Set bac to property of sender
-            #Check if menu (bacteria chosen) is in bacList
+            #Check if bacId (bacteria clicked) is in bacList
             if bac in self.bacList:
                 self.bacList = self.bacList[self.bacList != bac] #Remove from array
-                #Print msg
-                self.print_("Removed {} from filter".format(bacStr[bac-1]))
+                self.displayPrint("Removed {} from filter".format(bacStr[bac-1]))
             else:
                 self.bacList = np.append(self.bacList,bac) #Add to array
-                self.print_("Added {} to filter".format(bacStr[bac-1]))
+                self.displayPrint("Added {} to filter".format(bacStr[bac-1]))
 
-            self.bacActive = np.array(bacStr)[self.bacList-1] #Active bacteria filter
+            self.bacActive = np.array(bacStr)[self.bacList-1] #Active bacteria filter. List of strings
+            #If user removed all bacteria, remove filter, since there is no logic
+            #in analyzing empty data.
             if len(self.bacActive) == 0:
                 self.bacActive = "No bacteria selected. Using all bacteria"
+            #If all baceria is added, state so and don't filter, to save resources
             elif len(self.bacActive) == 4:
                 self.bacActive = "All bacteria selected"
             #Filter data
             self.setFilter()
 
         else:
-            self.print_("Error: No data has been loaded")
+            self.displayPrint("Error: No data has been loaded")
 
     #Get conditions for growth rate range filter
     def filterGrowthRange(self):
@@ -93,20 +102,20 @@ class Ui_MainWindow():
                 #Make sure there are values
                 if (r1 or r2) > 0:
                     self.growthActive = [min(r1,r2),max(r1,r2)] #Set active growth filter
-                    self.growthfrom_input.setPlaceholderText(str(r1)) #Set placeholder
-                    self.growthto_input.setPlaceholderText(str(r2)) #Set placeholder
+                    self.growthfrom_input.setPlaceholderText(str(r1)) #Set placeholder to current filter
+                    self.growthto_input.setPlaceholderText(str(r2)) #Set placeholder to current filter
                     #Filter data
                     self.setFilter()
-                    self.print_("Added growth rate range filter")
+                    self.displayPrint("Added growth rate range filter")
                 elif (r1 and r2) <= 0:
                     self.growthActive = "No active growth rate range filter"
                 else:
-                    self.print_("Please fill in BOTH of the limits")
+                    self.displayPrint("Please fill in BOTH of the limits")
             except ValueError:
-                self.print_("Growth rate range can ONLY be a integer or float, ex: [0.02, 1.00, 1, 4] NOT: [Hello, bye, %!#]")
+                self.displayPrint("Growth rate range can ONLY be a integer or float, ex: [0.02, 1.00, 1, 4] NOT: [Hello, bye, %!#]")
 
         else:
-            self.print_("Error: No data has been loaded")
+            self.displayPrint("Error: No data has been loaded")
 
     #Get conditions for temperature range filter
     def filterTempRange(self):
@@ -123,18 +132,18 @@ class Ui_MainWindow():
                     self.tempto_input.setPlaceholderText(str(r2)) #Set placeholder
                     #Filter data
                     self.setFilter()
-                    self.print_("Added temperature range filter")
+                    self.displayPrint("Added temperature range filter")
                 elif (r1 and r2) <= 0:
                     self.tempActive = "No active temperature range filter"
                 else:
-                    self.print_("Please fill in BOTH of the limits")
+                    self.displayPrint("Please fill in BOTH of the limits")
             except ValueError:
-                self.print_("Temperature range can ONLY be an integer, ex: 15, 45. NOT: [Hello, bye, %!#]")
+                self.displayPrint("Temperature range can ONLY be an integer, ex: 15, 45. NOT: [Hello, bye, %!#]")
 
         else:
-            self.print_("Error: No data has been loaded")
+            self.displayPrint("Error: No data has been loaded")
 
-    #Filter data
+    #Uses the specified filters to filter the data
     def setFilter(self):
         #Use mask and range_ to filter data if filter is active (specific type)
         if type(self.bacActive) != str: #For bacteria
@@ -150,8 +159,9 @@ class Ui_MainWindow():
         if type(self.tempActive) != str: #For temperature range
             tempRange = ((self.tempActive[0] < self.data[:,0]) & (self.data[:,0] < self.tempActive[1]))
             self.data = self.data[tempRange] #Data is filtered for temperature range
-        self.printFilter() #Print filter
+        self.filterPrint() #Print filter
 
+    #Clears all of the range filters
     def filterRangeClear(self):
         #Filters clear
         self.growthActive = "No active growth rate range filter"
@@ -167,8 +177,7 @@ class Ui_MainWindow():
         self.growthfrom_input.setText("")
         self.growthfrom_input.setPlaceholderText("Ex: 0.02")
 
-
-
+    #Resets the bacteria filters
     def filterBacClear(self):
         #UI clear
         self.bac1_chk.setChecked(True)
@@ -178,10 +187,6 @@ class Ui_MainWindow():
         #Filters clear
         self.bacActive = "All bacteria selected"
         self.bacList = np.array([1,2,3,4])
-
-    def printFilter(self):
-        #Print active filters
-        self.fprint()
 
     #Load data
     def dataloadUI(self):
@@ -195,20 +200,22 @@ class Ui_MainWindow():
             if len(msg_errors) == 0:
                 msg_errors = "No erroneous lines!"
 
-            self.print_(msg_errors)
-            self.print_(("Data loaded succesfully from {}").format(filename))
+            self.displayPrint(msg_errors)
             self.dataLoaded = True # Set data as loaded
 
             #Show filters
             self.bacteria_box.show()
             self.filterdata_box.show()
-            self.fprint()
+            self.filterPrint()
 
             #Add filters
             self.setFilter()
 
+            #Print succes msg
+            self.displayPrint(("Data loaded succesfully from {}").format(filename))
+
         except FileNotFoundError:
-            self.print_("File not found, please try again")
+            self.displayPrint("File not found, please try again")
 
     #Print statistics
     def statisticsUI(self):
@@ -216,16 +223,18 @@ class Ui_MainWindow():
             #Initial variables
             statStr = ["Mean Temperature","Mean Growth rate","Std Temperature",
                        "Std Growth rate","Mean Cold Growth rate",
-                       "Mean Hot Growth rate", "Min | max Growth rate", "Min | max Temperature",
-                       "Rows"]
+                       "Mean Hot Growth rate", "Min Growth rate", "Max Growth rate",
+                       "Min Temperature", "Max Temperature","Rows"]
             table_values = []
             #Create list of statistics
             for i in range(len(statStr)):
                 statList = dataStatistics(self.data,statStr[i])
                 table_values.append(statList)
 
+            #Round table_values
+            table_values = [ round(elem,3) for elem in table_values ]
             #Preferably we wouldn't consider hardcoding, however there was no
-            #other solution, that wouldn't completely change the layout
+            #other solution, that wouldn't completely change the layout of the app
             msg_table=("""=====================  ====================
 Statistic                                               Values
 =====================  ====================
@@ -235,42 +244,43 @@ Std Temperature                               {}
 Std Growth rate                                 {}
 Mean Cold Growth rate                      {}
 Mean Hot Growth rate                       {}
-Min | max Growth rate                      {}
-Min | max Temperature                     {}
+Min | Max Growth rate                      {} | {}
+Min | Max Temperature                     {} | {}
 Rows                                                  {}
 =====================  ====================""".format(*tuple(table_values)))
-            self.print_(msg_table) #Print table
+            self.displayPrint(msg_table) #Print table
 
         else:
-            self.print_("Error: No data has been loaded")
+            self.displayPrint("Error: No data has been loaded")
 
     #Show plots
     def showplotsUI(self):
         if self.dataLoaded:
-            self.print_("Generating plots...Done!")
+            self.displayPrint("Generating plots...Done!")
             dataPlot(self.data)
         else:
-            self.print_("Error: No data has been loaded")
+            self.displayPrint("Error: No data has been loaded")
 
     #Show data
     def showdataUI(self):
         if self.dataLoaded:
             np.set_printoptions(suppress=True)
-            self.print_("Printing data...")
-            self.print_(str(self.data))
-            self.print_("Data printed")
+            self.displayPrint("Printing data...")
+            self.displayPrint(str(self.data))
+            self.displayPrint("Data printed")
         else:
-            self.print_("Error: No data has been loaded")
+            self.displayPrint("Error: No data has been loaded")
 
     #print text into display_window
-    def print_(self,text):
+    def displayPrint(self,text):
         self.display_window.insertPlainText("""---------------------------------------------------------------------
 {}\n---------------------------------------------------------------------\n""".format(text))
         self.display_window.ensureCursorVisible() #Stay at bottom of window
 
-    def fprint(self):
+    #Print text into filter_window
+    def filterPrint(self):
         self.filter_window.clear()
-        self.filter_window.insertPlainText("""=======================================
+        self.filter_window.insertPlainText("""\n\n\n\n\n=======================================
                                        ACTIVE FILTERS
 
 Current filters:
@@ -282,8 +292,7 @@ Temperature range: {}
 
 
     ####################
-    #Everything below this point has been generated by Qt Designer
-    #However some parts have been modified.
+    #Most of the code below this point has been generated by Qt Designer
     ####################
 
     #The lines should be easy to read, such as:
@@ -293,7 +302,7 @@ Temperature range: {}
         #Initalization of main window
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowIcon(QtGui.QIcon('resources/icon.png'))
-        MainWindow.resize(868, 586)
+        MainWindow.resize(420*2.12, 666) #Dank memes :)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -469,7 +478,7 @@ Temperature range: {}
         self.temp_btn.setObjectName("temp_btn")
         self.formLayout.setWidget(11, QtWidgets.QFormLayout.SpanningRole, self.temp_btn)
         self.gridLayout_2.addWidget(self.range_box, 1, 1, 1, 1)
-        #Clear filters
+        #Clear filter buttons
         self.bacteria_clear = QtWidgets.QPushButton(self.filterdata_box)
         self.bacteria_clear.setObjectName("bacteria_clear")
         self.gridLayout_2.addWidget(self.bacteria_clear, 2, 0, 1, 1)
@@ -541,7 +550,7 @@ Temperature range: {}
         MainWindow.setTabOrder(self.display_window, self.filter_window)
 
     #This function sets the displaynames, placeholdertexts, tooltips and so on
-    #This is the front-end of the program
+    #It practically adds names to empty boxes
     #Keep in mind the setToolTip function takes an html-syntaxed input
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -621,11 +630,11 @@ Temperature range: {}
         self.filter_window.setStatusTip(_translate("MainWindow", "Shows current filters"))
         self.filter_window.setPlaceholderText(_translate("MainWindow", "No currently active filters"))
 
-
+#If file is run as main program, call the class and display a GUI
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv) #Syntax for pyqt
     MainWindow = QtWidgets.QMainWindow() #Define the mainwindow
-    ui = Ui_MainWindow() #Call the class which runs the __init__
+    ui = App() #Call the class which runs the __init__
     MainWindow.show() #Show the program
     sys.exit(app.exec_()) #Quit nicely
