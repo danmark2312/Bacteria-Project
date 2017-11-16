@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
     def __init__(self):
         object.__init__(self)
         self.setupUi(self)
- #       self.dataload()
+ #      self.dataload()
         
     
     def setupUi(self, Ui_MainWindow):
