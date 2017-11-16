@@ -26,8 +26,6 @@ from functions.userinput import displayMenu,inputStr,header
 from functions.filterData import filterData,printFilter
 import numpy as np
 
-#Add welcoming message
-
 
 #Initial variables
 dataLoaded = False
