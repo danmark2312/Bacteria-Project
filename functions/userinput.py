@@ -90,6 +90,9 @@ def inputLimit(prompt):
             if num == "clear": #If it is clear, break
                 num = "clear"
                 break
+            elif num == "back":
+                num = "back"
+                break
             else:    
                 print("Not a valid number. Please try again")
     return num
