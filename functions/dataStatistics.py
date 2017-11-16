@@ -60,11 +60,11 @@ def dataStatistics(data,statistics):
 
         #Define minimum values for temp and growth rate
         elif statistics == "Min | max Growth rate":
-            result = "{:f} | {:f}".format(min(data[:,0]),min(data[:,1]))
+            result = "{:f} | {:f}".format(min(data[:,0]),max(data[:,0]))
 
         #Define maximum values for temp and growth rate
         elif statistics == "Min | max Temperature":
-                result = "{:f} | {:f}".format(max(data[:,0]),max(data[:,1]))
+                result = "{:f} | {:f}".format(min(data[:,1]),max(data[:,1]))
 
     else:
         result = np.nan
