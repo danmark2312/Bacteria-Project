@@ -555,23 +555,25 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>dataload_input</tabstop>
+  <tabstop>dataload_btn</tabstop>
+  <tabstop>stat_btn</tabstop>
+  <tabstop>plot_btn</tabstop>
+  <tabstop>showdata_btn</tabstop>
+  <tabstop>bac1_chk</tabstop>
+  <tabstop>bac2_chk</tabstop>
+  <tabstop>bac3_chk</tabstop>
+  <tabstop>bac4_chk</tabstop>
+  <tabstop>growthfrom_input</tabstop>
+  <tabstop>growthto_input</tabstop>
+  <tabstop>growth_btn</tabstop>
+  <tabstop>tempfrom_input</tabstop>
+  <tabstop>tempto_input</tabstop>
+  <tabstop>tempBtn</tabstop>
+  <tabstop>display_window</tabstop>
+  <tabstop>filter_window</tabstop>
+ </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>dataload_btn</sender>
-   <signal>clicked()</signal>
-   <receiver>display_window</receiver>
-   <slot>paste()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>426</x>
-     <y>144</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>326</x>
-     <y>468</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
