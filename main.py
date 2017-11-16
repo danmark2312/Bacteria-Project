@@ -39,7 +39,7 @@ while True:
     printFilter(conditions[0],conditions[1],conditions[2]) #Print any active filters
     #User Menu
     menu = displayMenu(["Load data","Filter data","Display statistics", "Generate plots", "Show data", "Quit"])
-    
+
     #Load data
     if menu == 1:
         #Check for correct filename
@@ -49,7 +49,7 @@ while True:
             try:
                 filename = inputStr("Please enter the name of the datafile: ")
                 print("") #Add space
-                
+
                 #Check for exit
                 if filename.lower() != "exit":
                     data = dataLoad(filename) #Load data
@@ -57,14 +57,14 @@ while True:
                     dataLoaded = True #Set data as loaded
                     dataOld = np.copy(data) #Copy of data
                     break
-                
+
                 #exit
                 else:
                     break
-                
+
             except FileNotFoundError:
                 print("File not found, please try again")
-    
+
     #Filter data
     elif (menu == 2) and dataLoaded:
         while True:
@@ -72,73 +72,73 @@ while True:
             print("Please choose a filter")
             #Print any active filters
             printFilter(conditions[0],conditions[1],conditions[2])
-            
+
             menu2 = displayMenu(["Bacteria filter","Growth rate range filter","Temperature range filter","Back"])
-            
+
             #Bacteria type filter
             if menu2 == 1:
                 data,conditions = filterData("Bacteria filter",data,dataOld,conditions)
-                
+
             #Growth rate range filter
             elif menu2 == 2:
                 data,conditions = filterData("Growth rate range filter",data,dataOld,conditions)
-            
-            #Temeperature range filter 
+
+            #Temeperature range filter
             elif menu2 == 3:
                 data,conditions = filterData("Temperature range filter",data,dataOld,conditions)
-            
+
             #Back
             elif menu2 == 4:
                 break
-                        
-    
+
+
     #Display statistics
     elif (menu == 3) and dataLoaded:
         statStr = ["Mean Temperature","Mean Growth rate","Std Temperature",
                    "Std Growth rate", "Rows","Mean Cold Growth rate",
                    "Mean Hot Growth rate","Minimum Values", "Maximum Values","Back"]
-        
+
         header("STATISTICS MENU") #Interface
         #Print any active filters
         printFilter(conditions[0],conditions[1],conditions[2])
-        while True:   
+        while True:
             menu2 = displayMenu(statStr) #Show different statistics to be computed
             if menu2 == 10: #Quit
                 break
             else:
                 stat = dataStatistics(data,statStr[int(menu2-1)]) #Compute statistic
-            
+
             if (menu2 not in [8,9]) and np.isnan(stat):
                 stat = "Not a number"
-                
+
             #Print any active filters
             printFilter(conditions[0],conditions[1],conditions[2])
-            
+
             #Print statistic
-            print("""\n==================================================   
+            print("""==================================================
 {}
 --------------------------------------------------
 {}
 ==================================================\n""".format(statStr[int(menu2-1)],stat))
-            
-            
+
+
     #Generate plots
     elif (menu == 4) and dataLoaded:
         dataPlot(data)
         print("")
-    
+
     #Show all data
     elif (menu == 5) and dataLoaded:
         np.set_printoptions(threshold=np.inf)
         np.set_printoptions(suppress=True)
         print(data)
         np.set_printoptions(threshold=8)
-        
-        
+
+
     #Quit
     elif menu == 6:
         break
-    
+
     #No data loaded msg
     else:
         print("\nERROR: No data has been loaded")
