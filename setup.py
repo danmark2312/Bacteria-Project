@@ -27,11 +27,11 @@ packages = ["numpy","matplotlib.pyplot","csv","PyQt5.QtCore", "PyQt5.QtGui", "Py
 build_exe_options = {"packages": packages, "excludes": ["tkinter"],
                      "includes":additional_mods, "include_files":include_files}
 
-base = None
+base = "Win32GUI"
 
 setup(  name = "Bacteria Data Analysis Project",
         version = "2.0",
         author = "Simon Moe Sørensen & Emil Ballermann",
         description = "This program analyses data from bacteria experiments",
         options = {"build_exe": build_exe_options},
-        executables = [Executable("GUI.py", base=base, icon="resources/Icon.png")])
+        executables = [Executable("GUI.py", base=base, icon="resources/Icon.ico")])
