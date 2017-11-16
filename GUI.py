@@ -25,9 +25,8 @@ class App():
         self.bacList = np.array([1,2,3,4])
         self.growthActive = "No active growth rate range filter"
         self.tempActive = "No active temperature range filter"
-
-        self.setupUi(MainWindow) #Configure UI
-
+        #Configure UI
+        self.setupUi(MainWindow)
         #Adding functionality to program
         #The following lines connects the buttons and inputs with functions
         #Dataload
@@ -62,10 +61,10 @@ class App():
 
     #Get conditions for bacteria filter
     def filterBac(self):
+        bacStr = ["Salmonella enterica","Bacillus cereus","Listeria",
+              "Brochothrix thermosphacta"] #List of bacteria names
         sender = MainWindow.sender() #get sender
         if self.dataLoaded:
-            bacStr = ["Salmonella enterica","Bacillus cereus","Listeria",
-                  "Brochothrix thermosphacta"] #List of bacteria names
             bac = sender.property("bacId") #Set bac to property of sender
             #Check if bacId (bacteria clicked) is in bacList
             if bac in self.bacList:
@@ -85,7 +84,6 @@ class App():
                 self.bacActive = "All bacteria selected"
             #Filter data
             self.setFilter()
-
         else:
             self.displayPrint("Error: No data has been loaded")
 
@@ -110,8 +108,7 @@ class App():
                 else:
                     self.displayPrint("Please fill in BOTH of the limits")
             except ValueError:
-                self.displayPrint("Growth rate range can ONLY be a integer or float, ex: [0.02, 1.00, 1, 4] NOT: [Hello, bye, %!#]")
-
+                self.displayPrint("Growth rate range can ONLY be an integer or float, ex: [0.02, 1.00, 1, 4] NOT: [Hello, bye, %!#]")
         else:
             self.displayPrint("Error: No data has been loaded")
 
@@ -193,22 +190,17 @@ class App():
         try:
             self.data,msg_errors = dataLoad(filename) #Load data
             self.dataOld = np.copy(self.data) #Copy data
-
             #Print message
             if len(msg_errors) == 0:
                 msg_errors = "No erroneous lines!"
-
             self.displayPrint(msg_errors)
             self.dataLoaded = True # Set data as loaded
-
             #Show filters
             self.bacteria_box.show()
             self.filterdata_box.show()
             self.filterPrint()
-
             #Add filters
             self.setFilter()
-
             #Print succes msg
             self.displayPrint(("Data loaded succesfully from {}").format(filename))
 
@@ -278,15 +270,33 @@ Rows                                                  {}
     #Print text into filter_window
     def filterPrint(self):
         self.filter_window.clear()
-        self.filter_window.insertPlainText("""\n\n\n\n\n=======================================
-                                       ACTIVE FILTERS
+        self.filter_window.insertPlainText("""\n\n=======================================
+                                       ACTIVE FILTERS\n\n""")
 
-Current filters:
-Bacteria: {}
-Growth rate range: {}
-Temperature range: {}
-=======================================
-                      """.format(self.bacActive,self.growthActive,self.tempActive))
+        #Print active bacteria
+        self.filter_window.insertPlainText("Bacteria filters: ")
+        if type(self.bacActive) != str:
+            self.filter_window.insertPlainText("\n")
+            for elem in self.bacActive:
+                self.filter_window.insertPlainText("""- {}\n""".format(elem))
+        else:
+            self.filter_window.insertPlainText("{}\n".format(self.bacActive))
+
+        #Print active growth rate range filters
+        self.filter_window.insertPlainText("\nGrowth rate range filter: ")
+        if type(self.growthActive) != str:
+            self.filter_window.insertPlainText("\n             From: {} | To: {}\n".format(self.growthActive[0],self.growthActive[1]))
+        else:
+            self.filter_window.insertPlainText("{}\n".format(self.growthActive))
+
+        #Print active temperature filter
+        self.filter_window.insertPlainText("\nTemperature range filter: ")
+        if type(self.tempActive) != str:
+            self.filter_window.insertPlainText("\n             From: {} | To: {}\n".format(self.tempActive[0],self.tempActive[1]))
+        else:
+            self.filter_window.insertPlainText("{}\n".format(self.tempActive))
+
+        self.filter_window.insertPlainText("\n=======================================")
 
 
     ####################
