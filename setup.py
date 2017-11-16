@@ -20,10 +20,12 @@ from cx_Freeze import setup, Executable
 additional_mods = ['numpy.core._methods', 'numpy.lib.format',
                    'matplotlib.backends.backend_qt5agg']
 
+include_files = ["functions"]
+
 packages = ["numpy","matplotlib.pyplot","csv","PyQt5.QtCore", "PyQt5.QtGui", "PyQt5.QtWidgets"]
 
 build_exe_options = {"packages": packages, "excludes": ["tkinter"],
-                     "includes":additional_mods}
+                     "includes":additional_mods, "include_files":include_files}
 
 base = None
 
@@ -31,6 +33,5 @@ setup(  name = "Bacteria Data Analysis Project",
         version = "2.0",
         author = "Simon Moe Sørensen & Emil Ballermann",
         description = "This program analyses data from bacteria experiments",
-        icon="resources/Icon.png",
         options = {"build_exe": build_exe_options},
-        executables = [Executable("GUI.py", base=base)])
+        executables = [Executable("GUI.py", base=base, icon="resources/Icon.png")])
