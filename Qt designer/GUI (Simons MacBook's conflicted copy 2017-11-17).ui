@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>868</width>
-    <height>586</height>
+    <width>978</width>
+    <height>648</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -77,9 +77,6 @@
                <property name="toolTip">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Please enter a filename&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
-               <property name="statusTip">
-                <string>Enter the name of the datafile</string>
-               </property>
                <property name="text">
                 <string/>
                </property>
@@ -92,9 +89,6 @@
               <widget class="QPushButton" name="dataload_btn">
                <property name="toolTip">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Loads the datafile given to the left&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Click to load data from filename</string>
                </property>
                <property name="text">
                 <string>Load Data</string>
@@ -122,9 +116,6 @@
                <property name="toolTip">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Displays statistics based on current data&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
-               <property name="statusTip">
-                <string>Click to display statistics of current data</string>
-               </property>
                <property name="text">
                 <string>Display Statistics</string>
                </property>
@@ -135,9 +126,6 @@
                <property name="toolTip">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shows current data&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
-               <property name="statusTip">
-                <string>Click to show current data</string>
-               </property>
                <property name="text">
                 <string>Show data</string>
                </property>
@@ -147,9 +135,6 @@
               <widget class="QPushButton" name="plot_btn">
                <property name="toolTip">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Generates plots on current data&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Click to generate plots of current data</string>
                </property>
                <property name="text">
                 <string>Generate plots</string>
@@ -173,7 +158,7 @@
         <widget class="QGroupBox" name="filterdata_box">
          <property name="maximumSize">
           <size>
-           <width>350</width>
+           <width>454</width>
            <height>340</height>
           </size>
          </property>
@@ -189,12 +174,6 @@
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
               <widget class="QCheckBox" name="bac1_chk">
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press to activate or deactive filter&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Click to add/remove filter</string>
-               </property>
                <property name="text">
                 <string>Salmonella enterica</string>
                </property>
@@ -205,12 +184,6 @@
              </item>
              <item>
               <widget class="QCheckBox" name="bac2_chk">
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press to activate or deactive filter&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Click to add/remove filter</string>
-               </property>
                <property name="text">
                 <string>Bacillus cereus</string>
                </property>
@@ -221,12 +194,6 @@
              </item>
              <item>
               <widget class="QCheckBox" name="bac3_chk">
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press to activate or deactive filter&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Click to add/remove filter</string>
-               </property>
                <property name="text">
                 <string>Listeria</string>
                </property>
@@ -237,12 +204,6 @@
              </item>
              <item>
               <widget class="QCheckBox" name="bac4_chk">
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press to activate or deactive filter&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Click to add/remove filter</string>
-               </property>
                <property name="text">
                 <string>Brochothrix thermosphacta</string>
                </property>
@@ -256,12 +217,6 @@
           </item>
           <item>
            <widget class="QGroupBox" name="range_box">
-            <property name="maximumSize">
-             <size>
-              <width>166</width>
-              <height>242</height>
-             </size>
-            </property>
             <property name="title">
              <string>Range</string>
             </property>
@@ -275,7 +230,7 @@
              <item row="2" column="0">
               <widget class="QLabel" name="growth_label">
                <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filter for growth rate&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Goat&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="text">
                 <string>Growth rate</string>
@@ -285,7 +240,7 @@
              <item row="4" column="1">
               <widget class="QLabel" name="growthto_label">
                <property name="text">
-                <string>Upper limit</string>
+                <string>To</string>
                </property>
               </widget>
              </item>
@@ -303,12 +258,6 @@
                  <height>21</height>
                 </size>
                </property>
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter upper limit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Enter an upper limit for the range</string>
-               </property>
                <property name="placeholderText">
                 <string>Ex: 0.09</string>
                </property>
@@ -316,14 +265,8 @@
              </item>
              <item row="6" column="0" colspan="2">
               <widget class="QPushButton" name="growth_btn">
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press to add filter with limits stated above&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Press button to add growth rate filter</string>
-               </property>
                <property name="text">
-                <string>Add growth rate filter</string>
+                <string>Add Filter</string>
                </property>
               </widget>
              </item>
@@ -336,9 +279,6 @@
              </item>
              <item row="8" column="0">
               <widget class="QLabel" name="temp_label">
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Filter for temperature&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
                <property name="text">
                 <string>Temperature</string>
                </property>
@@ -347,14 +287,14 @@
              <item row="9" column="0">
               <widget class="QLabel" name="tempfrom_label">
                <property name="text">
-                <string>Lower limit</string>
+                <string>From</string>
                </property>
               </widget>
              </item>
              <item row="9" column="1">
               <widget class="QLabel" name="tempto_label">
                <property name="text">
-                <string>Upper limit</string>
+                <string>To</string>
                </property>
               </widget>
              </item>
@@ -372,12 +312,6 @@
                  <height>21</height>
                 </size>
                </property>
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter lower limit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Enter a lower limit for the range</string>
-               </property>
                <property name="placeholderText">
                 <string>Ex: 25</string>
                </property>
@@ -385,14 +319,8 @@
              </item>
              <item row="11" column="0" colspan="2">
               <widget class="QPushButton" name="tempBtn">
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Press to add filter with limits stated above&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Press button to add temperature filter</string>
-               </property>
                <property name="text">
-                <string>Add temperature filter</string>
+                <string>Add Filter</string>
                </property>
               </widget>
              </item>
@@ -402,7 +330,7 @@
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Goat&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="text">
-                <string>Lower limit</string>
+                <string>From</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -422,12 +350,6 @@
                  <width>70</width>
                  <height>21</height>
                 </size>
-               </property>
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter lower limit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Enter a lower limit for the range</string>
                </property>
                <property name="placeholderText">
                 <string>Ex: 0.02</string>
@@ -450,12 +372,6 @@
                  <width>70</width>
                  <height>21</height>
                 </size>
-               </property>
-               <property name="toolTip">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter upper limit&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-               </property>
-               <property name="statusTip">
-                <string>Enter an upper limit for the range</string>
                </property>
                <property name="text">
                 <string/>
@@ -488,18 +404,9 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QPlainTextEdit" name="display_window">
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Any information will be printed here&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="statusTip">
-          <string>Shows any printed information</string>
-         </property>
+        <widget class="QTextEdit" name="display_window">
          <property name="readOnly">
           <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string>No information printed</string>
          </property>
         </widget>
        </item>
@@ -511,7 +418,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPlainTextEdit" name="filter_window">
+        <widget class="QTextEdit" name="filter_window">
          <property name="maximumSize">
           <size>
            <width>200</width>
@@ -522,19 +429,16 @@
           <bool>false</bool>
          </property>
          <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This shows the active filters&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>Gut</string>
          </property>
          <property name="statusTip">
-          <string>Shows current filters</string>
+          <string/>
          </property>
          <property name="autoFillBackground">
           <bool>false</bool>
          </property>
          <property name="readOnly">
           <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string>No currently active filters</string>
          </property>
         </widget>
        </item>
@@ -548,32 +452,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>868</width>
-     <height>21</height>
+     <width>978</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <tabstops>
-  <tabstop>dataload_input</tabstop>
-  <tabstop>dataload_btn</tabstop>
-  <tabstop>stat_btn</tabstop>
-  <tabstop>plot_btn</tabstop>
-  <tabstop>showdata_btn</tabstop>
-  <tabstop>bac1_chk</tabstop>
-  <tabstop>bac2_chk</tabstop>
-  <tabstop>bac3_chk</tabstop>
-  <tabstop>bac4_chk</tabstop>
-  <tabstop>growthfrom_input</tabstop>
-  <tabstop>growthto_input</tabstop>
-  <tabstop>growth_btn</tabstop>
-  <tabstop>tempfrom_input</tabstop>
-  <tabstop>tempto_input</tabstop>
-  <tabstop>tempBtn</tabstop>
-  <tabstop>display_window</tabstop>
-  <tabstop>filter_window</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

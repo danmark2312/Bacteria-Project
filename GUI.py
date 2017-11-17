@@ -25,12 +25,33 @@ class Ui_MainWindow(object):
         self.stat_btn.clicked.connect(self.statisticsUI)
         #Show plots
         self.plot_btn.clicked.connect(self.showplotsUI)
+
+        #FILTERS
+        self.bacList = [1,2,3,4]
+
         #Checkboxes
-        self.bac1_chk.clicked.connect(self.filterBac("Salmonella enterica"))
+        self.bac1_chk.stateChanged.connect(self.filterBac)
+        self.bac2_chk.stateChanged.connect(self.filterBac)
 
     #Filter for bacteria
-    def filterBac(self,bac):
+    def filterBac(self):
+        bacStr = ["Salmonella enterica","Bacillus cereus","Listeria",
+              "Brochothrix thermosphacta"]
 
+        #Check if menu (bacteria chosen) is in bacList
+        if bac in self.bacList:
+            self.bacList = self.bacList[self.bacList != bac] #Remove from array
+        else:
+            self.bacList = np.append(self.bacList,bac) #Add to array
+
+        bacActive = np.array(bacStr)[self.bacList-1] #Active bacteria filter
+
+        self.print_(str(self.bacList))
+
+        if len(bacActive) == 0:
+            bacActive = "No active bacteria filter"
+
+        return
 
     #Load data
     def dataloadUI(self):

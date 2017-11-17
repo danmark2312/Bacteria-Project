@@ -1,0 +1,1 @@
+C:\Users\Simon\Anaconda3\Lib\site-packages\PyQt5\pyuic5.bat -x GUI.ui -o GUI.py
