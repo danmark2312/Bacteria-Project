@@ -45,25 +45,6 @@ class App():
         self.bac1_chk.stateChanged.connect(self.filterBac)
         self.bac2_chk.stateChanged.connect(self.filterBac)
 
-    #Filter for bacteria
-    def filterBac(self):
-        bacStr = ["Salmonella enterica","Bacillus cereus","Listeria",
-              "Brochothrix thermosphacta"]
-
-        #Check if menu (bacteria chosen) is in bacList
-        if bac in self.bacList:
-            self.bacList = self.bacList[self.bacList != bac] #Remove from array
-        else:
-            self.bacList = np.append(self.bacList,bac) #Add to array
-
-        bacActive = np.array(bacStr)[self.bacList-1] #Active bacteria filter
-
-        self.print_(str(self.bacList))
-
-        if len(bacActive) == 0:
-            bacActive = "No active bacteria filter"
-
-        return
         #On state change, do filters
         self.bac1_chk.stateChanged.connect(self.filterBac) #on state change
         self.bac2_chk.stateChanged.connect(self.filterBac)
@@ -83,6 +64,25 @@ class App():
         #Hide filters
         self.bacteria_box.hide()
         self.filterdata_box.hide()
+
+    #Filter for bacteria
+    def filterBac(self):
+        bacStr = ["Salmonella enterica","Bacillus cereus","Listeria",
+              "Brochothrix thermosphacta"]
+
+        #Check if menu (bacteria chosen) is in bacList
+        if bac in self.bacList:
+            self.bacList = self.bacList[self.bacList != bac] #Remove from array
+        else:
+            self.bacList = np.append(self.bacList,bac) #Add to array
+
+        bacActive = np.array(bacStr)[self.bacList-1] #Active bacteria filter
+
+        self.print_(str(self.bacList))
+
+        if len(bacActive) == 0:
+            bacActive = "No active bacteria filter"
+        return
 
     #Get conditions for bacteria filter
     def filterBac(self):
